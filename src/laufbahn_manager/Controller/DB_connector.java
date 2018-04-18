@@ -193,14 +193,14 @@ public class DB_connector {
     }
 
     // Update Data
-    public void updateLaufbahn(String schule_bez, String schule_comment, String lehre_bez, String lehre_comment, boolean skills_checked, String skills_comment, boolean ausland_checked, String ausland_comment, boolean weiterbildung_checked, String weiterbildung_comment, int id_pers) throws SQLException{
-        PreparedStatement preparedStatement = connection.prepareStatement("update laufbahn set schule_bez = ?, schule_comment = ?, lehre_bez = ? , lehre_comment = ?, skills_checked = ?, skills_comment = ?, ausland_checked = ?, ausland_comment = ?, weiterbildung_checked = ?, weiterbildung_comment = ? where fk_id_person = ?;");
+    public void updateLaufbahn(String schule_bez, String schule_comment, String lehre_bez, String lehre_comment, String skills_bez, String skills_comment, boolean ausland_checked, String ausland_comment, boolean weiterbildung_checked, String weiterbildung_comment, int id_pers) throws SQLException{
+        PreparedStatement preparedStatement = connection.prepareStatement("update laufbahn set schule_bez = ?, schule_comment = ?, lehre_bez = ? , lehre_comment = ?, skills_bez = ?, skills_comment = ?, ausland_checked = ?, ausland_comment = ?, weiterbildung_checked = ?, weiterbildung_comment = ? where fk_id_person = ?;");
     
         preparedStatement.setString(1, schule_bez);
         preparedStatement.setString(2, schule_comment);
         preparedStatement.setString(3, lehre_bez);
         preparedStatement.setString(4, lehre_comment);
-        preparedStatement.setBoolean(5, skills_checked);
+        preparedStatement.setString(5, skills_bez);
         preparedStatement.setString(6, skills_comment);
         preparedStatement.setBoolean(7, ausland_checked);
         preparedStatement.setString(8, ausland_comment);

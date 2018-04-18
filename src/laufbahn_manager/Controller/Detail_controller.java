@@ -66,7 +66,7 @@ public class Detail_controller {
     // Document
     private boolean saved = true;
     private HBox boxDocuments;
-    private Path rootDir = Paths.get("C:\\Users\\Jens Helfenstein\\Documents\\Laufbahn_Manager");
+    private Path rootDir = Paths.get("C:\\Users\\vmadmin\\Documents\\Laufbahn_Manager");
     private Path personsDir;
     private File selectedFile, newFile;
     private FileChooser chooser = new FileChooser();
@@ -245,29 +245,28 @@ public class Detail_controller {
             chooser.getExtensionFilters().add(fileExtensions);
             
             selectedFile = chooser.showOpenDialog(mainStage);
-            personsDir = Paths.get(rootDir.toString() + "\\" + actPers.getName() + "_" + actPers.getVorname() + "_" + actPers.getPersonalnummer());
-            newFile = new File(personsDir.toString() + "\\" + selectedFile.getName());
-            
-            
-            try {
-                mainConnector = new DB_connector();
-                mainConnector.insertDocument(newFile, besp);
-                mainConnector.closeConnection();
-                updateDocumentsBox(besp);
+            if(selectedFile != null){
+               personsDir = Paths.get(rootDir.toString() + "\\" + actPers.getName() + "_" + actPers.getVorname() + "_" + actPers.getPersonalnummer());
+                newFile = new File(personsDir.toString() + "\\" + selectedFile.getName());
+                try {
+                    mainConnector = new DB_connector();
+                    mainConnector.insertDocument(newFile, besp);
+                    mainConnector.closeConnection();
+                    updateDocumentsBox(besp);
                 
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Detail_controller.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
-                Logger.getLogger(Detail_controller.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            try {
-                Files.copy(selectedFile.toPath(), newFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                
-            } catch (IOException ex) {
-                Logger.getLogger(Detail_controller.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(Detail_controller.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Detail_controller.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                try {
+                    Files.copy(selectedFile.toPath(), newFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+                } catch (IOException ex) {
+                    Logger.getLogger(Detail_controller.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }          
         });
         
         
@@ -283,8 +282,8 @@ public class Detail_controller {
                 
                 TextField schule_comment, lehre_comment, skills_comment, ausland_comment;
                 TextArea  weiterbildung_comment;
-                CheckBox skills_checked, ausland_checked, weiterbildung_checked;
-                ComboBox schule_bez, lehre_bez;
+                CheckBox ausland_checked, weiterbildung_checked;
+                ComboBox schule_bez, lehre_bez, skills_bez;
                 
                 schule_bez = (ComboBox)detail_view.getListSkills().get(0).getChildren().get(0);
                 lehre_bez = (ComboBox)detail_view.getListSkills().get(1).getChildren().get(0);
@@ -295,11 +294,11 @@ public class Detail_controller {
                 ausland_comment = (TextField)detail_view.getListSkills().get(3).getChildren().get(1);
                 weiterbildung_comment = (TextArea)detail_view.getListSkills().get(4).getChildren().get(1);
                 
-                skills_checked = (CheckBox)detail_view.getListSkills().get(2).getChildren().get(0);
+                skills_bez = (ComboBox)detail_view.getListSkills().get(2).getChildren().get(0);
                 ausland_checked = (CheckBox)detail_view.getListSkills().get(3).getChildren().get(0);
                 weiterbildung_checked = (CheckBox)detail_view.getListSkills().get(4).getChildren().get(0);
                 
-                mainConnector.updateLaufbahn(String.valueOf(schule_bez.getValue()), schule_comment.getText(), String.valueOf(lehre_bez.getValue()), lehre_comment.getText(), skills_checked.isSelected(), skills_comment.getText(), ausland_checked.isSelected(), ausland_comment.getText(), weiterbildung_checked.isSelected(), weiterbildung_comment.getText(), Integer.valueOf(actPers.getId()));
+                mainConnector.updateLaufbahn(String.valueOf(schule_bez.getValue()), schule_comment.getText(), String.valueOf(lehre_bez.getValue()), lehre_comment.getText(), String.valueOf(skills_bez.getValue()), skills_comment.getText(), ausland_checked.isSelected(), ausland_comment.getText(), weiterbildung_checked.isSelected(), weiterbildung_comment.getText(), Integer.valueOf(actPers.getId()));
                 mainConnector.closeConnection();
                 
                 

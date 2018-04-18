@@ -107,7 +107,7 @@ public class Detail_view {
         boxSchule.getStyleClass().add("skillBox");
         listSkills.add(boxSchule);
         ComboBox cbSchule = new ComboBox();
-        cbSchule.getItems().addAll("Berufsschule (ohne BMS)", "Berufsschule (mit BMS)");
+        cbSchule.getItems().addAll("Schule" ,"Berufsschule (ohne BMS)", "Berufsschule (mit BMS)");
         TextField tfSchule = new TextField();
         
         // Ausbildung
@@ -118,7 +118,7 @@ public class Detail_view {
         boxAusbildungsstatus.getStyleClass().add("skillBox");
         listSkills.add(boxAusbildungsstatus);
         ComboBox cbAusbildungsstatus = new ComboBox();
-        cbAusbildungsstatus.getItems().addAll("In Ausbildung (1. Lehrjahr)", "In Ausbildung (2. Lehrjahr)", "In Ausbildung (3. Lehrjahr)", "In Ausbildung (4. Lehrjahr)", "Ausbildung abgeschlossen");
+        cbAusbildungsstatus.getItems().addAll("Ausbildungsstatus","In Ausbildung (1. Lehrjahr)", "In Ausbildung (2. Lehrjahr)", "In Ausbildung (3. Lehrjahr)", "In Ausbildung (4. Lehrjahr)", "Ausbildung abgeschlossen");
         TextField tfAusbildungsstatus = new TextField();
         
         // Skills
@@ -127,7 +127,8 @@ public class Detail_view {
         boxSkills.setSpacing(15);
         boxSkills.getStyleClass().add("skillBox");
         boxSkills.setPadding(new Insets(5, 35, 5, 35));
-        CheckBox checkboxSkills = new CheckBox("Hat an Skills teilgenommen");
+        ComboBox cbSkills = new ComboBox();
+        cbSkills.getItems().addAll("Skills", "Regionalmeisterschaft", "Swiss Skills", "World Skills");
         TextField commentSkills = new TextField();        
         listSkills.add(boxSkills);
         
@@ -149,7 +150,7 @@ public class Detail_view {
         boxWeiterbildung.setPadding(new Insets(5, 35, 5, 35));
         CheckBox checkboxWeiterbildung = new CheckBox("Aus- & Weiterbildungen / Projekte");
         TextArea commentWeiterbildung = new TextArea();
-        commentWeiterbildung.setPrefHeight(SCREEN_HEIGHT / 10);
+        commentWeiterbildung.setPrefHeight(SCREEN_HEIGHT / 14);
         listSkills.add(boxWeiterbildung);
         
         sep4 = new Separator();       
@@ -193,7 +194,7 @@ public class Detail_view {
                 boxPersonSkills.getChildren().add(boxAusbildungsstatus);
                     boxAusbildungsstatus.getChildren().addAll(cbAusbildungsstatus, tfAusbildungsstatus);
                 boxPersonSkills.getChildren().add(boxSkills);
-                    boxSkills.getChildren().addAll(checkboxSkills, commentSkills);
+                    boxSkills.getChildren().addAll(cbSkills, commentSkills);
                 boxPersonSkills.getChildren().add(boxAusland);
                     boxAusland.getChildren().addAll(checkboxAusland, commentAusland);
                 boxPersonSkills.getChildren().add(boxWeiterbildung);
@@ -209,21 +210,7 @@ public class Detail_view {
         initData();
     }
     
-    //Methods
-    
-    public VBox createTickBoxField(String field){
-        VBox boxField = new VBox();
-        boxField.setAlignment(Pos.CENTER);
-        boxField.setSpacing(15);
-        boxField.getStyleClass().add("skillBox");
-        boxField.setPadding(new Insets(5, 35, 5, 35));
-        CheckBox box = new CheckBox(field);
-        TextField comment = new TextField();
-        boxField.getChildren().addAll(box, comment);
-        listSkills.add(boxField);
-        return boxField;
-        
-    }
+    //Methods   
     
     //Getter / Setter
     public HBox getRoot(){
@@ -248,7 +235,7 @@ public class Detail_view {
             String schule_comment = laufbahn.getString("schule_comment");
             String lehre_bez = laufbahn.getString("lehre_bez");
             String lehre_comment = laufbahn.getString("lehre_comment");
-            boolean skills_checked = laufbahn.getBoolean("skills_checked");
+            String skills_bez = laufbahn.getString("skills_bez");
             String skills_comment = laufbahn.getString("skills_comment");
             boolean ausland_checked = laufbahn.getBoolean("ausland_checked");
             String ausland_comment = laufbahn.getString("ausland_comment");
@@ -265,8 +252,8 @@ public class Detail_view {
             TextField tfAusbildung = (TextField)listSkills.get(1).getChildren().get(1);
             tfAusbildung.setText(lehre_comment);
             
-            CheckBox cbSkills = (CheckBox)listSkills.get(2).getChildren().get(0);
-            cbSkills.setSelected(skills_checked);
+            ComboBox cbSkills = (ComboBox)listSkills.get(2).getChildren().get(0);
+            cbSkills.setValue(skills_bez);
             TextField tfSkills = (TextField)listSkills.get(2).getChildren().get(1);
             tfSkills.setText(skills_comment);
             

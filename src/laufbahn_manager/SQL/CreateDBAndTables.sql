@@ -39,7 +39,7 @@ CREATE TABLE `laufbahn` (
   `schule_comment` varchar(150) DEFAULT 'Kommentar',
   `lehre_bez` varchar(45) DEFAULT 'Ausbildungsstatus',
   `lehre_comment` varchar(150) DEFAULT 'Kommentar',
-  `skills_checked` tinyint(1) DEFAULT '0',
+  `skills_bez` varchar(45) DEFAULT 'Skills',
   `skills_comment` varchar(150) DEFAULT 'Kommentar',
   `ausland_checked` tinyint(1) DEFAULT '0',
   `ausland_comment` varchar(150) DEFAULT 'Kommentar',
@@ -52,3 +52,4 @@ CREATE TABLE `laufbahn` (
 ) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
 
 
+INSERT INTO credentials(username, password) VALUES ("", "da39a3ee5e6b4b0d3255bfef95601890afd80709");

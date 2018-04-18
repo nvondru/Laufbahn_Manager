@@ -32,7 +32,7 @@ import laufbahn_manager.View.Overview_view;
  */
 public class Overview_controller {
     private Laufbahn_Manager master;
-    private Path rootDir = Paths.get("C:\\Users\\Jens Helfenstein\\Documents\\Laufbahn_Manager");
+    private Path rootDir = Paths.get("C:\\Users\\vmadmin\\Documents\\Laufbahn_Manager");
     private Path personsDir;
     
     private Detail_controller detail_controller;
