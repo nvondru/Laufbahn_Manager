@@ -36,7 +36,7 @@ public class Login_controller {
         this.master = master;
         login_view = new Login_view();
         scene = new Scene(login_view.getRoot());
-                
+        
         initActionHandlers();
 
         

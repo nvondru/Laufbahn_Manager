@@ -91,7 +91,6 @@ public class Detail_controller {
         this.mainStage.setScene(scene);
         this.mainStage.setMaximized(true);
         addHandler_closeRequest();
-
         
     }
 
@@ -144,7 +143,7 @@ public class Detail_controller {
     private void addHandler_btnAddBesprechung() {
            detail_view.getBtnAddBesprechung().setOnAction((event) -> {
 
-               if(detail_view.getBoxBesprechungen().getChildren().size() <= 9){                
+               if(detail_view.getBoxBesprechungen().getChildren().size() <= 7){                
                    // Neue Besprechung wird in DB erstellt und Programm aktualisiert
                    try {
                        mainConnector = new DB_connector();
@@ -152,7 +151,7 @@ public class Detail_controller {
                        mainConnector.closeConnection();
                        updateBoxBesprechungen();
                        
-                       // 
+                       // Neue Besprechung wird angezeigt und im Auswahlfenster als "selected" markiert
                        detail_view.getRightPart().getChildren().clear();
                        detail_view.getRightPart().getChildren().add(createBesprechungPage(listBesprechungen.get(listBesprechungen.size() -1))); 
                        detail_view.getBoxBesprechungen().getChildren().get(detail_view.getBoxBesprechungen().getChildren().size() -1).getStyleClass().add("selectedBesp");
@@ -203,6 +202,8 @@ public class Detail_controller {
 
     private VBox createBesprechungPage(Besprechung besp) throws SQLException, ClassNotFoundException {
         VBox root = new VBox();
+        
+        
         
         root.setPadding(new Insets(30));
         root.setSpacing(15);
